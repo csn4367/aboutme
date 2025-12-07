@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chandrashekar – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #18191e;
+      --bg-darker: #121316;
+      --bg-grey: #d9dde5;
+      --bg-light: #f4f6fb;
+      --text-main: #ffffff;
+      --text-soft: #cbd5f5;
+      --accent-blue: #5cb7ff;
+      --accent-blue-strong: #4ab0ff;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.45);
+      --radius-pill: 999px;
+      --radius-card: 24px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .page {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .section {
+      padding: 64px 20px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ---------- SIMPLE ANIMATION KEYFRAMES ---------- */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUpSoft {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      background: radial-gradient(circle at 20% 0, #343744 0, #15161c 50%, #101015 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 80px;
+    }
+
+    .hero-logo {
+      height: 120px;
+      width: auto;
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      font-weight: 600;
+      margin: 0 0 14px;
+    }
+
+    .hero-title span {
+      color: var(--accent-blue-strong);
+    }
+
+    .hero-sub {
+      margin: 0 0 32px;
+      font-size: 1.38rem;
+      color: var(--text-soft);
+      max-width: 38rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 11px 24px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.36);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn span.icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.75);
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      opacity: 0;
+      animation: fadeUp 0.9s ease-out 0.15s forwards;
+    }
+
+    .hero-image-wrapper {
+      max-width: 520px;
+      width: 100%;
+      transition: transform 0.25s ease;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 28px 45px rgba(0,0,0,0.7));
+      transform: translateX(6%);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-image-wrapper:hover .hero-image {
+      transform: translateX(6%) translateY(-4px) scale(1.01);
+    }
+
+    /* ---------------- TOOLKIT STRIP ---------------- */
+
+    .toolkit {
+      background: var(--bg-grey);
+      padding: 28px 20px;
+    }
+
+    .toolkit-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeUpSoft 0.8s ease-out 0.3s forwards;
+    }
+
+    .toolkit-label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #22242c;
+      white-space: nowrap;
+    }
+
+    .toolkit-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .tool-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tool-icon:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.28);
+    }
+
+    /* ---------------- DESIGN FOCUS ---------------- */
+
+    .focus {
+      background: var(--bg-light);
+      position: relative;
+    }
+
+    .focus::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -120px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 10% 10%, rgba(78,115,255,0.18), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .focus-header {
+      max-width: var(--max-width);
+      margin: 0 auto 26px;
+      opacity: 0;
+      animation: fadeUpSoft 0.8s ease-out 0.2s forwards;
+    }
+
+    .focus-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #22242c;
+      margin: 0 0 6px;
+    }
+
+    .focus-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .focus-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      padding: 14px 14px 16px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUpSoft 0.7s ease-out forwards;
+    }
+
+    .focus-card:nth-child(1) { animation-delay: 0.25s; }
+    .focus-card:nth-child(2) { animation-delay: 0.35s; }
+    .focus-card:nth-child(3) { animation-delay: 0.45s; }
+    .focus-card:nth-child(4) { animation-delay: 0.55s; }
+
+    .focus-thumb {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.25);
+      aspect-ratio: 16 / 9;   /* keeps all tiles same height */
+    }
+
+    .focus-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .focus-card:hover .focus-thumb img {
+      transform: scale(1.05);
+    }
+
+    .focus-label {
+      border-radius: 999px;
+      background: #22242c;
+      padding: 12px 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #f9fafb;
+      align-self: flex-center;
+    }
+
+    /* ---------------- ABOUT ---------------- */
+
+    .about {
+      background: var(--bg-darker);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      left: -120px;
+      top: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      opacity: 0.6;
+    }
+
+    .about-inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .about-heading {
+      font-size: 1.8rem;
+      margin: 0 0 12px;
+    }
+
+    .about-sub {
+      margin: 0 0 12px;
+      font-size: 0.98rem;
+      font-weight: 400;
+    }
+
+    .about-body {
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba(226,232,255,0.9);
+      max-width: 32rem;
+      line-height: 1.7;
+    }
+
+    .about-links {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      gap: 8px;
+    }
+
+    .social-btn--behance { background: #053eff; }
+
+    .about-visual {
+      border-radius: 26px;
+      background: #1c1e26;
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    .footer {
+      background: #e5e7ef;
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #22242c;
+    }
+
+    /* -------------- RESPONSIVE -------------- */
+
+    @media (max-width: 1024px) {
+      .section { padding: 56px 20px; }
+      .hero-title { font-size: 2.1rem; }
+      .focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-image-wrapper { max-width: 440px; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+      }
+
+      .hero-left { order: 1; }
+      .hero-right {
+        order: 2;
+        justify-content: center;
+      }
+
+      .hero-image-wrapper {
+        max-width: 380px;
+      }
+
+      .about-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 44px 16px; }
+
+      .hero-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 40px;
+      }
+
+      .hero-title { font-size: 1.9rem; }
+      .hero-sub { font-size: 0.9rem; }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn { width: 100%; }
+
+      .hero-right {
+        order: 2;
+        display: flex;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .hero-image-wrapper {
+        max-width: 280px;
+      }
+
+      .hero-image {
+        width: 100%;
+        transform: translateX(0);
+      }
+
+      .toolkit-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .focus-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .focus-card {
+        padding: 10px;
+      }
+
+      .focus-label {
+        font-size: 0.86rem;
+      }
+
+      .about-heading { font-size: 1.5rem; }
+      .about-body { font-size: 0.86rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <section class="section hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <div class="hero-header">
+          <img src="https://ik.imagekit.io/Chan/Website-02.png" alt="Phoenix Design Studio logo" class="hero-logo" />
+        </div>
+
+        <h1 class="hero-title">
+          Minimal design. <span>Maximum impact.</span>
+        </h1>
+        <p class="hero-sub">
+          Graphic designer focused on building refined products, expressive visuals, and high-impact campaigns.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://ik.imagekit.io/Chan/GD_CV.pdf" class="btn">
+            <span class="icon">↓</span>
+            <span>Download Resume</span>
+          </a>
+          <a href="https://www.behance.net/csndesigner" class="btn">
+            <span class="icon">★</span>
+            <span>View Portfolio</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-image-wrapper">
+          <img src="https://ik.imagekit.io/Chan/Website-24.png" alt="Chandrashekar hero" class="hero-image" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT -->
+  <section class="toolkit">
+    <div class="toolkit-inner">
+      <div class="toolkit-label">My design toolkit:</div>
+      <div class="toolkit-icons">
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-05.png" alt="Adobe Illustrator"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-06.png" alt="Adobe Photoshop"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-07.png" alt="CorelDRAW"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-08.png" alt="Adobe Premiere Pro"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-09.png" alt="Figma"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-10.png" alt="HTML5"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-12.png" alt="Veo 3"></div>
+        <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-13.png" alt="Fi tool"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN FOCUS -->
+  <section class="section focus" id="focus">
+    <div class="focus-header">
+      <h2 class="focus-title">Design Focus</h2>
+    </div>
+
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="focus-thumb">
+          <img src="https://ik.imagekit.io/Chan/Website-16.png" alt="Branding & Visual Identity" />
+        </div>
+        <div class="focus-label">Branding &amp; Visual Identity</div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-thumb">
+          <img src="https://ik.imagekit.io/Chan/Website-17.png" alt="Campaign & Marketing Design" />
+        </div>
+        <div class="focus-label">Campaign &amp; Marketing Design</div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-thumb">
+          <img src="https://ik.imagekit.io/Chan/Website-18.png" alt="Digital Creative Design" />
+        </div>
+        <div class="focus-label">Digital Creative Design</div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-thumb">
+          <img src="https://ik.imagekit.io/Chan/Website-19.png" alt="Print & Publication Design" />
+        </div>
+        <div class="focus-label">Print &amp; Publication Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about">
+    <div class="about-inner">
+      <div>
+        <div class="about-chip">About</div>
+        <h3 class="about-heading">I’m Chandrashekar</h3>
+        <p class="about-sub">
+          A designer who enjoys crafting visuals that feel effortless, expressive, and intentional.
+        </p>
+        <p class="about-body">
+          My work spans product, branding, and motion, focusing on storytelling and design that balances beauty with function.
+        </p>
+
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/csndesigner/" target="_blank" class="social-btn">
+            <strong>in</strong> LinkedIn
+          </a>
+          <a href="https://www.behance.net/csndesigner" target="_blank" class="social-btn social-btn--behance">
+            <strong>Be</strong> Behance
+          </a>
+        </div>
+      </div>
+
+      <div class="about-visual">
+        <img src="https://ik.imagekit.io/Chan/Website-04.png" alt="Designer at work illustration" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2025 · Created by Chandrashekar N
+  </footer>
+</div>
+</body>
+</html>
