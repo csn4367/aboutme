@@ -56,7 +56,7 @@
       margin: 0 auto;
     }
 
-    /* ---------- SIMPLE ANIMATION KEYFRAMES ---------- */
+    /* ---------- ANIMATION KEYFRAMES ---------- */
 
     @keyframes fadeUp {
       from {
@@ -78,6 +78,27 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    @keyframes floatHero {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-10px); }
+    }
+
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 0 rgba(90,200,255,0); }
+      50%  { text-shadow: 0 0 18px rgba(90,200,255,0.8); }
+      to   { text-shadow: 0 0 0 rgba(90,200,255,0); }
+    }
+
+    /* Scroll reveal helper */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .reveal-on-scroll.is-visible {
+      animation: fadeUpSoft 0.7s ease-out forwards;
     }
 
     /* ---------------- HERO ---------------- */
@@ -126,6 +147,7 @@
 
     .hero-title span {
       color: var(--accent-blue-strong);
+      animation: pulseGlow 3.5s ease-in-out 1.2s infinite;
     }
 
     .hero-sub {
@@ -187,6 +209,7 @@
       max-width: 520px;
       width: 100%;
       transition: transform 0.25s ease;
+      animation: floatHero 6s ease-in-out 1.1s infinite alternate;
     }
 
     .hero-image {
@@ -194,12 +217,11 @@
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 28px 45px rgba(0,0,0,0.7));
-      transform: translateX(6%);
       transition: transform 0.3s ease;
     }
 
     .hero-image-wrapper:hover .hero-image {
-      transform: translateX(6%) translateY(-4px) scale(1.01);
+      transform: translateY(-4px) scale(1.01);
     }
 
     /* ---------------- TOOLKIT STRIP ---------------- */
@@ -217,8 +239,6 @@
       gap: 50px;
       flex-wrap: wrap;
       justify-content: space-between;
-      opacity: 0;
-      animation: fadeUpSoft 0.8s ease-out 0.3s forwards;
     }
 
     .toolkit-label {
@@ -226,6 +246,27 @@
       font-weight: 600;
       color: #22242c;
       white-space: nowrap;
+      position: relative;
+    }
+
+    .toolkit-label::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 38px;
+      height: 3px;
+      border-radius: 999px;
+      background: #22242c;
+      opacity: 0.0;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .toolkit-inner.is-visible .toolkit-label::after {
+      opacity: 0.55;
+      transform: scaleX(1);
     }
 
     .toolkit-icons {
@@ -277,8 +318,6 @@
     .focus-header {
       max-width: var(--max-width);
       margin: 0 auto 26px;
-      opacity: 0;
-      animation: fadeUpSoft 0.8s ease-out 0.2s forwards;
     }
 
     .focus-title {
@@ -304,15 +343,26 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      opacity: 0;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .focus-card.reveal-on-scroll {
       transform: translateY(20px);
+    }
+
+    .focus-card.is-visible {
       animation: fadeUpSoft 0.7s ease-out forwards;
     }
 
-    .focus-card:nth-child(1) { animation-delay: 0.25s; }
-    .focus-card:nth-child(2) { animation-delay: 0.35s; }
-    .focus-card:nth-child(3) { animation-delay: 0.45s; }
-    .focus-card:nth-child(4) { animation-delay: 0.55s; }
+    .focus-card:nth-child(1).is-visible { animation-delay: 0.05s; }
+    .focus-card:nth-child(2).is-visible { animation-delay: 0.15s; }
+    .focus-card:nth-child(3).is-visible { animation-delay: 0.25s; }
+    .focus-card:nth-child(4).is-visible { animation-delay: 0.35s; }
+
+    .focus-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.22);
+    }
 
     .focus-thumb {
       border-radius: 22px;
@@ -515,7 +565,7 @@
 
       .hero-image {
         width: 100%;
-        transform: translateX(0);
+        transform: none;
       }
 
       .toolkit-inner {
@@ -581,7 +631,7 @@
 
   <!-- TOOLKIT -->
   <section class="toolkit">
-    <div class="toolkit-inner">
+    <div class="toolkit-inner reveal-on-scroll">
       <div class="toolkit-label">My design toolkit:</div>
       <div class="toolkit-icons">
         <div class="tool-icon"><img src="https://ik.imagekit.io/Chan/Website-05.png" alt="Adobe Illustrator"></div>
@@ -598,33 +648,33 @@
 
   <!-- DESIGN FOCUS -->
   <section class="section focus" id="focus">
-    <div class="focus-header">
-      <h2 class="focus-title">Design Focus</h2>
+    <div class="focus-header reveal-on-scroll">
+      <h2 class="focus-title">Design focus</h2>
     </div>
 
     <div class="focus-grid">
-      <div class="focus-card">
+      <div class="focus-card reveal-on-scroll">
         <div class="focus-thumb">
           <img src="https://ik.imagekit.io/Chan/Website-16.png" alt="Branding & Visual Identity" />
         </div>
         <div class="focus-label">Branding &amp; Visual Identity</div>
       </div>
 
-      <div class="focus-card">
+      <div class="focus-card reveal-on-scroll">
         <div class="focus-thumb">
           <img src="https://ik.imagekit.io/Chan/Website-17.png" alt="Campaign & Marketing Design" />
         </div>
         <div class="focus-label">Campaign &amp; Marketing Design</div>
       </div>
 
-      <div class="focus-card">
+      <div class="focus-card reveal-on-scroll">
         <div class="focus-thumb">
           <img src="https://ik.imagekit.io/Chan/Website-18.png" alt="Digital Creative Design" />
         </div>
         <div class="focus-label">Digital Creative Design</div>
       </div>
 
-      <div class="focus-card">
+      <div class="focus-card reveal-on-scroll">
         <div class="focus-thumb">
           <img src="https://ik.imagekit.io/Chan/Website-19.png" alt="Print & Publication Design" />
         </div>
@@ -666,6 +716,20 @@
   <footer class="footer">
     © 2025 · Created by Chandrashekar N
   </footer>
+
+  <!-- Scroll reveal script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  </script>
 </div>
 </body>
 </html>
