@@ -783,6 +783,36 @@
         font-size: 0.86rem;
       }
     }
+    <!-- ✅ Referral Tracking Script -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+
+      const referralKeys = [
+        'ref',
+        'referral',
+        'ref_code',
+        'utm_source',
+        'utm_campaign',
+        'utm_medium'
+      ];
+
+      let referralData = {};
+
+      referralKeys.forEach(key => {
+        if (params.has(key)) {
+          referralData[key] = params.get(key);
+        }
+      });
+
+      if (Object.keys(referralData).length) {
+        localStorage.setItem(
+          'referral_data',
+          JSON.stringify(referralData)
+        );
+      }
+    })();
+  </script>
   </style>
 </head>
 <body>
